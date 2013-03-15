@@ -1,27 +1,15 @@
 package org.zeroturnaround.stats;
 
-import hudson.EnvVars;
 import hudson.Extension;
 import hudson.Plugin;
-import hudson.model.Action;
 import hudson.model.ManagementLink;
-import hudson.model.TaskListener;
 import hudson.model.Hudson;
-import hudson.model.Project;
-import hudson.model.Queue.QueueDecisionHandler;
-import hudson.model.Queue.Task;
-import hudson.model.Run;
-import hudson.model.listeners.RunListener;
-import hudson.util.LogTaskListener;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 
@@ -29,7 +17,6 @@ import jenkins.model.Jenkins;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.zeroturnaround.stats.model.RunStats;
 import org.zeroturnaround.stats.model.StatsData;
 import org.zeroturnaround.stats.util.ConvertXML;
 
@@ -37,7 +24,6 @@ public class ClusterStatisticsPlugin extends Plugin {
   private StatsData statsData = new StatsData();
   private transient long lastSaved = 0L;
 
-  private static final Logger log = Logger.getLogger(ClusterStatisticsPlugin.class.getName());
   private static final int DATA_SIZE_LIMIT = 150000;
   private static final int SOME_EXTRA = 10000;
 
@@ -100,76 +86,6 @@ public class ClusterStatisticsPlugin extends Plugin {
     if (statsData.getAllWaitTimes().size() > (DATA_SIZE_LIMIT + SOME_EXTRA)) {
       statsData.cleanUp(DATA_SIZE_LIMIT);
     }
-  }
-
-  @Extension
-  public static class MyDecisionHandler extends QueueDecisionHandler {
-
-    @Override
-    public boolean shouldSchedule(Task p, List<Action> actions) {
-      RunStats stats = new RunStats();
-      stats.setProjectName(p.getDisplayName());
-      
-      ClusterStatisticsPlugin plugin = ClusterStatisticsPlugin.getInstance();
-      plugin.getStatsData().addToEdenSpace(stats);
-
-      return true;
-    }
-  }
-
-  @Extension
-  public static class MyListener extends RunListener<Run> {
-
-    @Override
-    public void onCompleted(Run r, TaskListener listener) {
-      super.onCompleted(r, listener);
-      
-      ClusterStatisticsPlugin plugin = ClusterStatisticsPlugin.getInstance();
-      RunStats stats = plugin.getStatsData().popUnInitializedItem(r.getParent().getDisplayName());
-      if (stats != null) {
-        stats.setDuration(r.getDuration());
-        stats.setStarted(r.getTimeInMillis());
-
-        String nodeName = "master";
-
-        try {
-          EnvVars envVars = r.getEnvironment(new LogTaskListener(log, Level.INFO));
-          nodeName = envVars.get("NODE_NAME");
-        }
-        catch (IOException e) {
-        }
-        catch (InterruptedException e) {
-        }
-
-        stats.setNodeName(nodeName);
-        plugin.getStatsData().addToTenuredSpace(stats);
-
-        try {
-          plugin.cleanUp();
-          plugin.maybeSave();
-        }
-        catch (IOException e1) {
-          e1.printStackTrace();
-        }
-      }
-      else {
-        log.fine("Unable to find the task from the tasks for completed. Ignoring");
-      }
-    }
-
-    @Override
-    public void onStarted(Run r, TaskListener listener) {
-      super.onStarted(r, listener);
-      ClusterStatisticsPlugin plugin = ClusterStatisticsPlugin.getInstance();
-      RunStats stats = plugin.getStatsData().getUnInitializedItem(r.getParent().getDisplayName());
-      if (stats != null) {
-        stats.setStarted(System.currentTimeMillis());
-      }
-      else {
-        log.fine("Unable to find the task from Eden space for startup. Ignoring.");
-      }
-    }
-
   }
 
   @Extension
