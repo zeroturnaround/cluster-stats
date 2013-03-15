@@ -17,12 +17,12 @@ import org.zeroturnaround.stats.model.RunStats;
 public class StartCompleteListener extends RunListener<Run> {
   private static final Logger log = Logger.getLogger(StartCompleteListener.class.getName());
 
-  @Override
   /**
    * Whenever a job is completed we try to figure out which item from the scheduled
    * items was completed. We then attach the node name to the item and propagate
    * from eden to tenured as a sign of completed statistics item.
    */
+  @Override
   public void onCompleted(Run r, TaskListener listener) {
     super.onCompleted(r, listener);
 

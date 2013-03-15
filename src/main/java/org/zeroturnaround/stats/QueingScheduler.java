@@ -12,12 +12,12 @@ import org.zeroturnaround.stats.model.RunStats;
 @Extension
 public class QueingScheduler extends QueueDecisionHandler {
 
-  @Override
   /**
    * We will store all scheduled items into an eden space. Each
    * item will get a timestamp on creation so we know when they
    * were scheduled.
    */
+  @Override
   public boolean shouldSchedule(Task p, List<Action> actions) {
     RunStats stats = new RunStats();
     stats.setProjectName(p.getDisplayName());
