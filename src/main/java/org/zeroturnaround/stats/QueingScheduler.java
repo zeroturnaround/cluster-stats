@@ -1,5 +1,6 @@
 package org.zeroturnaround.stats;
 
+import hudson.Extension;
 import hudson.model.Action;
 import hudson.model.Queue.QueueDecisionHandler;
 import hudson.model.Queue.Task;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import org.zeroturnaround.stats.model.RunStats;
 
+@Extension
 public class QueingScheduler extends QueueDecisionHandler {
 
   @Override
