@@ -1,0 +1,8 @@
+bin
+eclipse-classes
+target
+.project
+.settings
+.classpath
+work
+.DS_Store
