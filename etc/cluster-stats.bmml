@@ -1,0 +1,97 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1141" measuredH="592" mockupW="1128" mockupH="589">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="13" y="3" w="1128" h="589" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Jenkins%20Cluster%20Statistics%0Ahttp%3A//jenkins/cluster-stats/</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="20" y="86" w="-1" h="-1" measuredW="297" measuredH="382" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/jenkins-shot.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Title" x="342" y="86" w="609" h="-1" measuredW="236" measuredH="50" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cluster%20Stats</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="381" y="144" w="-1" h="-1" measuredW="120" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Wait%20time%20in%20queue</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextArea" x="528" y="144" w="350" h="42" measuredW="200" measuredH="140" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>past%207%20days%20-%202min%2038sec%0Aall%20history%20-%201min%2017sec</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::TextInput" x="381" y="210" w="-1" h="-1" measuredW="87" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Build%20duration</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::TextArea" x="528" y="210" w="350" h="42" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>past%207%20days%20-%201min%2038sec%0Aall%20history%20-%2017min%2017sec</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextInput" x="381" y="276" w="-1" h="-1" measuredW="120" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Jenkins%20throughput</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextArea" x="528" y="276" w="350" h="42" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>past%207%20days%20-%201777%20builds%20-%2087%20builds/hour%0Aall%20history%20-%2018%20builds%20-%2012%20builds/hour</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::TextInput" x="393" y="333" w="-1" h="-1" measuredW="55" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Node%201</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::TextInput" x="393" y="387" w="-1" h="-1" measuredW="57" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Node%20...</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::TextInput" x="393" y="435" w="-1" h="-1" measuredW="54" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Node%20n</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::TextArea" x="528" y="333" w="322" h="42" measuredW="200" measuredH="140" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>past%207%20days%20-%20100%20builds%20-%2012%20builds/hour%0Aall%20history%20-%202%20builds%20-%204%20builds/hour</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::TextArea" x="528" y="385" w="322" h="42" measuredW="200" measuredH="140" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>past%207%20days%20-%20100%20builds%20-%2012%20builds/hour%0Aall%20history%20-%202%20builds%20-%204%20builds/hour</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::TextArea" x="528" y="437" w="322" h="42" measuredW="200" measuredH="140" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>past%207%20days%20-%20100%20builds%20-%2012%20builds/hour%0Aall%20history%20-%202%20builds%20-%204%20builds/hour</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Arrow" x="878" y="161" w="81" h="220" measuredW="150" measuredH="100" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Arrow" x="878" y="227" w="81" h="154" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::VCurly" x="878" y="336" w="-1" h="-1" measuredW="180" measuredH="140" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20you%20open%20up%20you%20can%20see%20node%20specific%20info</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
