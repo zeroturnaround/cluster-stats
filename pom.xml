@@ -34,6 +34,21 @@
 		</dependency>
 	</dependencies>
 
+	<developers>
+		<developer>
+			<id>toomasr</id>
+			<name>Toomas Römer</name>
+			<email>toomas@zeroturnaround.com</email>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>Apache License 2.0</name>
+			<comments>All source code is under the the APL 2.0. See LICENSE file for more details.</comments>
+		</license>
+	</licenses>
+
 	<build>
 		<plugins>
 			<plugin>
