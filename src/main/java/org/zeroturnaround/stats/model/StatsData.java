@@ -416,17 +416,9 @@ public class StatsData {
     if (runStats.size() < 2)
       return 0L;
 
-    final long first = findFirstOfPastWeek().getStarted();
-    final long last = runStats.get(runStats.size() - 1).getStarted();
-
-    final long diff = last - first;
-    final long weeks = diff / WEEK_IN_MS;
     final long pastWeekCount = getCountPastWeek();
 
-    if (WEEK_IN_MS > diff)
-      return runStats.size();
-
-    return pastWeekCount / weeks;
+    return pastWeekCount;
   }
 
   public long getDurationPercentile(long percentile) {
