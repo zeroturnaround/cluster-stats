@@ -20,15 +20,21 @@ public class TestWaits extends TestCase {
     assertEquals(0L, result);
   }
 
+  private void genStats(int duration, int timeInQueue, long startedMillisAgo) {
+    RunStats stats = new RunStats(duration, timeInQueue, System.currentTimeMillis() - startedMillisAgo, System.currentTimeMillis() - 12000, PROJECT_NAME);
+    statsData.addToTenuredSpace(stats);
+  }
+
+  private void genStats(int duration, int timeInQueue, long startedMillisAgo, String node) {
+    RunStats stats = new RunStats(duration, timeInQueue, System.currentTimeMillis() - startedMillisAgo, System.currentTimeMillis() - 12000, PROJECT_NAME, node);
+    statsData.addToTenuredSpace(stats);
+  }
+
   public void testGetAvgWaitAll() {
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, 7 * StatsData.DAY_IN_MS + 10);
 
-    stats = new RunStats(1000, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(1000, 5000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 6000, 6000);
+    genStats(1000, 5000, 6000);
 
     long result = statsData.getAvgWait();
     assertEquals(5000L, result);
@@ -40,44 +46,30 @@ public class TestWaits extends TestCase {
   }
 
   public void testGetAvgWaitPastWeek() {
-    RunStats stats = new RunStats(1000, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(1000, 4000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 6000, 6000);
+    genStats(1000, 4000, 6000);
 
     long result = statsData.getAvgWaitPastWeek();
     assertEquals(5000L, result);
   }
 
   public void testGetAvgWaitPastWeekIgnoreOlderData() {
-    // Lets add some data that should not be used
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 6000, 7 * StatsData.DAY_IN_MS + 10);
 
-    // Lets add some data that should be used in calculations
-    stats = new RunStats(1000, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(1000, 4000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 6000, 6000);
+    genStats(1000, 4000, 6000);
 
     long result = statsData.getAvgWaitPastWeek();
     assertEquals(5000L, result);
   }
 
   public void testGetAvgWaitAllPerNode() {
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, 7 * StatsData.DAY_IN_MS + 10);
 
-    stats = new RunStats(1000, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 6000, 6000);
 
-    stats = new RunStats(1000, 3000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(1000, 5000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 3000, 6000, "node1");
+    genStats(1000, 5000, 6000, "node1");
 
     Map<String, Long> result = statsData.getAvgWaitPerNode();
     assertEquals(5000L, result.get("master").longValue());
@@ -85,20 +77,13 @@ public class TestWaits extends TestCase {
   }
 
   public void testGetAvgWaitPastWeekPerNode() {
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, 7 * StatsData.DAY_IN_MS + 10);
+    genStats(1000, 6000, 6000);
 
-    stats = new RunStats(1000, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 3000, 7 * StatsData.DAY_IN_MS + 10, "node1");
 
-    stats = new RunStats(1000, 3000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(1000, 4000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(1000, 5000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, 6000, "node1");
+    genStats(1000, 5000, 6000, "node1");
 
     Map<String, Long> result = statsData.getAvgWaitPerNodePastWeek();
     assertEquals(6000L, result.get("master").longValue());
