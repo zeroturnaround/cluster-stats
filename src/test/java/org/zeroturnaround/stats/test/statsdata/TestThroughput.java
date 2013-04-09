@@ -81,29 +81,23 @@ public class TestThroughput extends TestCase {
 
   public void testGetAvgThroughputHoursPastWeek() {
     // more than 2 hours ago and 2 weeks ago
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (2 * StatsData.WEEK_IN_MS + 2 * StatsData.HOUR_IN_MS) - 10, System.currentTimeMillis() - 12000,
-        PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    // more than 2 hours ago and 2 weeks ago
-    stats = new RunStats(1000, 4000, System.currentTimeMillis() - (2 * StatsData.WEEK_IN_MS + 2 * StatsData.HOUR_IN_MS) - 10, System.currentTimeMillis() - 12000,
-        PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats((2 * StatsData.WEEK_IN_MS + 2 * StatsData.HOUR_IN_MS) - 10);
+    genStats((2 * StatsData.WEEK_IN_MS + 2 * StatsData.HOUR_IN_MS) - 10);
 
     // more than 2 hours ago and 1 week ago
-    stats = new RunStats(1000, 4000, System.currentTimeMillis() - (StatsData.WEEK_IN_MS + 2 * StatsData.HOUR_IN_MS) - 10, System.currentTimeMillis() - 12000,
-        PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats((StatsData.WEEK_IN_MS + 2 * StatsData.HOUR_IN_MS) - 10);
 
     // in the last week
-    stats = new RunStats(1000, 4000, System.currentTimeMillis(), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    // in the last week
-    stats = new RunStats(1000, 4000, System.currentTimeMillis(), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(0);
+    genStats(0);
 
     assertEquals(2, statsData.getAvgThroughputHourPastWeek());
+  }
+
+  private void genStats(long startedMillisAgo) {
+    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - startedMillisAgo, System.currentTimeMillis() - 12000,
+        PROJECT_NAME);
+    statsData.addToTenuredSpace(stats);
   }
 
   public void testGetAvgThroughputDayPastWeek() {
