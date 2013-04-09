@@ -16,48 +16,42 @@ public class TestDurations extends TestCase {
   }
 
   public void testGetAvgDurationAll() {
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(1000, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(1000, 5000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, 7 * StatsData.DAY_IN_MS + 10);
+    genStats(1000, 6000, 6000);
+    genStats(1000, 5000, 6000);
 
     long result = statsData.getAvgDuration();
+
     assertEquals(1000L, result);
   }
 
+  private void genStats(int duration, int timeInQueue, long startedMillisAgo) {
+    RunStats stats = new RunStats(duration, timeInQueue, System.currentTimeMillis() - startedMillisAgo, System.currentTimeMillis() - 12000, PROJECT_NAME);
+    statsData.addToTenuredSpace(stats);
+  }
+
+  private void genStats(int duration, int timeInQueue, long startedMillisAgo, String node) {
+    RunStats stats = new RunStats(duration, timeInQueue, System.currentTimeMillis() - startedMillisAgo, System.currentTimeMillis() - 12000, PROJECT_NAME, node);
+    statsData.addToTenuredSpace(stats);
+  }
+
   public void testGetAvgDurationPastWeek() {
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(2000, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(3000, 5000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, 7 * StatsData.DAY_IN_MS + 10);
+    genStats(2000, 6000, 6000);
+    genStats(3000, 5000, 6000);
 
     long result = statsData.getAvgDurationPastWeek();
     assertEquals(2500L, result);
   }
 
   public void testGetAvgDurationPerNode() {
-    RunStats stats = new RunStats(1500, 4000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1500, 4000, 7 * StatsData.DAY_IN_MS + 10);
 
-    stats = new RunStats(1500, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1500, 6000, 6000);
+    genStats(1500, 6000, 6000);
 
-    stats = new RunStats(1500, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(2000, 3000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(3000, 5000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
+    genStats(2000, 3000, 6000, "node1");
+    genStats(3000, 5000, 6000, "node1");
 
     Map<String, Long> result = statsData.getAvgDurationPerNode();
     assertEquals(1500L, result.get("master").longValue());
@@ -65,20 +59,13 @@ public class TestDurations extends TestCase {
   }
 
   public void testGetAvgDurationPerNodePastWeek() {
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (7 * StatsData.DAY_IN_MS + 10), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, 7 * StatsData.DAY_IN_MS + 10);
 
-    stats = new RunStats(1000, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 6000, 6000);
+    genStats(1500, 6000, 6000);
 
-    stats = new RunStats(1500, 6000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(2000, 3000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
-
-    stats = new RunStats(3000, 5000, System.currentTimeMillis() - 6000, System.currentTimeMillis() - 12000, PROJECT_NAME, "node1");
-    statsData.addToTenuredSpace(stats);
+    genStats(2000, 3000, 6000, "node1");
+    genStats(3000, 5000, 6000, "node1");
 
     Map<String, Long> result = statsData.getAvgDurationPerNodePastWeek();
     assertEquals(2, result.entrySet().size());
@@ -91,21 +78,11 @@ public class TestDurations extends TestCase {
   }
 
   public void testGetAvgThroughputHours() {
-    // more than 2 hours ago
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - (2 * StatsData.HOUR_IN_MS) - 10, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, 2 * StatsData.HOUR_IN_MS + 10);
+    genStats(1000, 4000, 2 * StatsData.HOUR_IN_MS + 10);
 
-    // more than 2 hours ago
-    stats = new RunStats(1000, 4000, System.currentTimeMillis() - (2 * StatsData.HOUR_IN_MS) - 10, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    // more than 1 hour ago
-    stats = new RunStats(1000, 4000, System.currentTimeMillis() - StatsData.HOUR_IN_MS - 10, System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-
-    // during the past hour
-    stats = new RunStats(1000, 4000, System.currentTimeMillis(), System.currentTimeMillis() - 12000, PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
+    genStats(1000, 4000, StatsData.HOUR_IN_MS + 10);
+    genStats(1000, 4000, 0);
 
     assertEquals(2, statsData.getAvgThroughputHour());
   }

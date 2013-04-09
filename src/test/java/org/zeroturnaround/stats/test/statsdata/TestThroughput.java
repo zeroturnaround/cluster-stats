@@ -13,6 +13,13 @@ public class TestThroughput extends TestCase {
     statsData.deleteAllStatistics();
   }
 
+  // quite specific helper
+  private void genStats(long startedMillisAgo) {
+    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - startedMillisAgo, System.currentTimeMillis() - 12000,
+        PROJECT_NAME);
+    statsData.addToTenuredSpace(stats);
+  }
+
   public void testGetAvgThroughputHoursSimple() {
     assertEquals(0, statsData.getAvgThroughputHour());
   }
@@ -133,11 +140,4 @@ public class TestThroughput extends TestCase {
 
     assertEquals(7, statsData.getAvgThroughputWeekPastWeek());
   }
-
-  private void genStats(long startedMillisAgo) {
-    RunStats stats = new RunStats(1000, 4000, System.currentTimeMillis() - startedMillisAgo, System.currentTimeMillis() - 12000,
-        PROJECT_NAME);
-    statsData.addToTenuredSpace(stats);
-  }
-
 }
