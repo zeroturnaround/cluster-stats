@@ -10,3 +10,4 @@ The plugin will measure the time in queue, time in build and show these statisti
 
 ![Plugin Dashboard](https://raw.github.com/zeroturnaround/cluster-stats/master/etc/shot001.png)
 
+
