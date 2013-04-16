@@ -10,6 +10,7 @@
 	<artifactId>cluster-stats</artifactId>
 	<version>0.3-SNAPSHOT</version>
 	<packaging>hpi</packaging>
+	<url>http://wiki.jenkins-ci.org/display/JENKINS/Cluster+Stats</url>
 
 	<repositories>
 		<repository>
@@ -36,7 +37,7 @@
 	<developers>
 		<developer>
 			<id>toomasr</id>
-			<name>Toomas Römer</name>
+			<name>Toomas Romer</name>
 			<email>toomas@zeroturnaround.com</email>
 		</developer>
 	</developers>
@@ -49,9 +50,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:ssh://github.com/zeroturnaround/cluster-stats.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/zeroturnaround/cluster-stats.git</developerConnection>
-		<url>https://github.com/zeroturnaround/cluster-stats</url>
+		<connection>scm:git:ssh://github.com/jenkinsci/cluster-stats.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/jenkinsci/cluster-stats.git</developerConnection>
+		<url>https://github.com/jenkinsci/cluster-stats</url>
 	</scm>
 
 	<build>
