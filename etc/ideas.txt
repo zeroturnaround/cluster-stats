@@ -1,3 +1,0 @@
-+ node specific statistics
-+ download the XML file for offsite analysis
-
