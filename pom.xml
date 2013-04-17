@@ -10,7 +10,7 @@
 	<artifactId>cluster-stats</artifactId>
 	<version>0.4-SNAPSHOT</version>
 	<packaging>hpi</packaging>
-	<url>http://wiki.jenkins-ci.org/display/JENKINS/ClusterStatsPlugin</url>
+	<url>http://wiki.jenkins-ci.org/display/JENKINS/ClusterStats+Plugin</url>
 
 	<repositories>
 		<repository>
