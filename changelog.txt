@@ -1,0 +1,6 @@
+********************************************
+	Jenkins Cluster Stats Plugin	
+********************************************
+	0.4.1 (18th April 2013)
+	* Updating meta data for Jenkins plugin center to pick up the plugin 
+
