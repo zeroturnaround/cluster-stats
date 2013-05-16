@@ -62,7 +62,7 @@ l.layout(title: _("Disk Usage"), secured: "true") {
           text("Node")
         }
         th() {
-          text("Average wait")
+          text("Average build time")
         }
       }
       perNode.each{ k, v ->
