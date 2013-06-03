@@ -506,6 +506,19 @@ public class StatsData {
     }
     return clusterInfo;
   }
+  
+  public Map<String, Long> getJobsMetaInfo() {
+    Map<String, Long> jobInfo = new HashMap<String, Long>();
+    for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
+      RunStats stats = ite.next();
+
+      Long count = jobInfo.get(stats.getProjectName());
+      if (count == null)
+        count = Long.valueOf(0);
+      jobInfo.put(stats.getProjectName(), ++count);
+    }
+    return jobInfo;
+  }
 
   public void deleteAllStatistics() {
     runStats = new ArrayList<RunStats>();

@@ -115,6 +115,7 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       raw("</table></div>")
     }
     h2("Throughput")
+    jobMetaInfo = statsData.getJobsMetaInfo();
     div() {
         text("""All time: ${statsData.getAvgThroughputHour()} jobs/hour, 
               ${statsData.getAvgThroughputDay()} jobs/day, 
@@ -125,7 +126,9 @@ l.layout(title: _("Disk Usage"), secured: "true") {
                 ${statsData.getAvgThroughputDayPastWeek()} jobs/day,
                 ${statsData.getAvgThroughputWeekPastWeek()} jobs/week""")
         raw(""" <a href="#" onClick="toggleNodeView('throughputPastWeek');return false;">show by Node</a>""")
-
+        br()
+        text("""We have ${jobMetaInfo.size()} unique job configurations.""")
+        raw(""" <a href="#" onClick="toggleNodeView('jobBreakdown');return false;">Show by Node</a>""")
         
       raw("""<div id="throughput" style="visibility:hidden;display:none"><table class="stats">""")
       tr() {
@@ -175,6 +178,29 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       }
       raw("</table></div>")
     }
+    
+    raw("""<div id="jobBreakdown" style="visibility:hidden;display:none"><table class="stats">""")
+      tr() {
+        th() {
+          text("Node")
+        }
+        th() {
+          text("No of jobs")
+        }
+      }
+      
+      perNode = jobMetaInfo.sort{a, b -> b.value <=> a.value}
+      perNode.each{ k, v ->
+        tr() {
+          td() {
+            text(k)
+          }
+          td() {
+            text(v)
+          }
+        }
+      }
+      raw("</table></div>")
     
     noExecs = 0;
     metaInfo = statsData.getClusterMetaInfo();
