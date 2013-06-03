@@ -27,7 +27,7 @@ public class StartCompleteListener extends RunListener<Run> {
     super.onCompleted(r, listener);
 
     ClusterStatisticsPlugin plugin = ClusterStatisticsPlugin.getInstance();
-    RunStats stats = plugin.getStatsData().popUnInitializedItem(r.getParent().getDisplayName());
+    RunStats stats = plugin.getStatsData().popUnInitializedItem(r.getParent().getName());
     if (stats != null) {
       stats.setDuration(r.getDuration());
       stats.setStarted(r.getTimeInMillis());
