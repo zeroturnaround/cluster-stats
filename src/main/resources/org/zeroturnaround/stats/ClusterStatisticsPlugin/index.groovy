@@ -62,7 +62,7 @@ l.layout(title: _("Disk Usage"), secured: "true") {
           text("Node")
         }
         th() {
-          text("Average build time")
+          text("Average duration")
         }
       }
       perNode.each{ k, v ->
@@ -119,10 +119,61 @@ l.layout(title: _("Disk Usage"), secured: "true") {
         text("""All time: ${statsData.getAvgThroughputHour()} jobs/hour, 
               ${statsData.getAvgThroughputDay()} jobs/day, 
               ${statsData.getAvgThroughputWeek()} jobs/week""")
+        raw(""" <a href="#" onClick="toggleNodeView('throughput');return false;">show by Node</a>""")
         br()
         text("""Last 7 days: ${statsData.getAvgThroughputHourPastWeek()} jobs/hour,
                 ${statsData.getAvgThroughputDayPastWeek()} jobs/day,
-                ${statsData.getAvgThroughputWeekPastWeek()} jobs/week""")    
+                ${statsData.getAvgThroughputWeekPastWeek()} jobs/week""")
+        raw(""" <a href="#" onClick="toggleNodeView('throughputPastWeek');return false;">show by Node</a>""")
+
+        
+      raw("""<div id="throughput" style="visibility:hidden;display:none"><table class="stats">""")
+      tr() {
+        th() {
+          text("Node")
+        }
+        th() {
+          text("No of jobs")
+        }
+      }
+      
+      Map perNode = statsData.getJobCountBreakdown();
+      perNode = perNode.sort{a, b -> b.value <=> a.value}
+      perNode.each{ k, v ->
+        tr() {
+          td() {
+            text(k)
+          }
+          td() {
+            text(v)
+          }
+        }
+      }
+      raw("</table></div>")
+      
+      raw("""<div id="throughputPastWeek" style="visibility:hidden;display:none"><table class="stats">""")
+      tr() {
+        th() {
+          text("Node")
+        }
+        th() {
+          text("No of jobs")
+        }
+      }
+      
+      perNode = statsData.getJobCountBreakdownPastweek();
+      perNode = perNode.sort{a, b -> b.value <=> a.value}
+      perNode.each{ k, v ->
+        tr() {
+          td() {
+            text(k)
+          }
+          td() {
+            text(v)
+          }
+        }
+      }
+      raw("</table></div>")
     }
     
     h2("Stats")

@@ -3,9 +3,11 @@ package org.zeroturnaround.stats.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 
@@ -449,6 +451,34 @@ public class StatsData {
     perc.setData(statsL);
     long rtrn = (long) perc.evaluate(percentile);
     return rtrn;
+  }
+  
+  public Map<String, Long> getJobCountBreakdown() {
+    Map<String, Long> nodeInfo = new HashMap<String, Long>();
+    for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
+      RunStats stats = ite.next();
+      
+      Long count = nodeInfo.get(stats.getNodeName());
+      if (count == null)
+        count = Long.valueOf(0);
+      nodeInfo.put(stats.getNodeName(), ++count);
+    }
+    return nodeInfo;
+  }
+  
+  public Map<String, Long> getJobCountBreakdownPastweek() {
+    final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
+    Map<String, Long> nodeInfo = new HashMap<String, Long>();
+    for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
+      RunStats stats = ite.next();
+      if (stats.getStarted()>=sevenDaysAgo) {
+        Long count = nodeInfo.get(stats.getNodeName());
+        if (count == null)
+          count = Long.valueOf(0);
+        nodeInfo.put(stats.getNodeName(), ++count);
+      }
+    }
+    return nodeInfo;
   }
 
   public void deleteAllStatistics() {
