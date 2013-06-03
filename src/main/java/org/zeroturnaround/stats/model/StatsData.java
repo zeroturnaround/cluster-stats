@@ -1,5 +1,8 @@
 package org.zeroturnaround.stats.model;
 
+import hudson.model.Computer;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import jenkins.model.Jenkins;
 
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 
@@ -452,12 +457,12 @@ public class StatsData {
     long rtrn = (long) perc.evaluate(percentile);
     return rtrn;
   }
-  
+
   public Map<String, Long> getJobCountBreakdown() {
     Map<String, Long> nodeInfo = new HashMap<String, Long>();
     for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
       RunStats stats = ite.next();
-      
+
       Long count = nodeInfo.get(stats.getNodeName());
       if (count == null)
         count = Long.valueOf(0);
@@ -465,13 +470,13 @@ public class StatsData {
     }
     return nodeInfo;
   }
-  
+
   public Map<String, Long> getJobCountBreakdownPastweek() {
     final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
     Map<String, Long> nodeInfo = new HashMap<String, Long>();
     for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
       RunStats stats = ite.next();
-      if (stats.getStarted()>=sevenDaysAgo) {
+      if (stats.getStarted() >= sevenDaysAgo) {
         Long count = nodeInfo.get(stats.getNodeName());
         if (count == null)
           count = Long.valueOf(0);
@@ -479,6 +484,27 @@ public class StatsData {
       }
     }
     return nodeInfo;
+  }
+
+  public Set<String> getClusterMetaInfo() {
+    Set<String> clusterInfo = new HashSet<String>();
+    Computer[] computers = Jenkins.getInstance().getComputers();
+    for (int i = 0; i < computers.length; i++) {
+      Computer c = computers[i];
+      Map<Object, Object> env = null;
+      try {
+        env = c.getSystemProperties();
+      }
+      catch (IOException e) {
+      }
+      catch (InterruptedException e) {
+      }
+      String osName = "Unknown";
+      if (env.get("os.name") != null)
+        osName = (String) env.get("os.name");
+      clusterInfo.add(computers[i].getNode().getDisplayName()+","+c.countExecutors()+","+osName);
+    }
+    return clusterInfo;
   }
 
   public void deleteAllStatistics() {

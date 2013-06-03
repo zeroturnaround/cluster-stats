@@ -176,6 +176,46 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       raw("</table></div>")
     }
     
+    noExecs = 0;
+    metaInfo = statsData.getClusterMetaInfo();
+    metaInfo.each {
+      val ->
+        noExecs += val.split(",")[1].toInteger();
+    }
+    h2("Cluster meta info")
+    p() {
+      text("We have ${metaInfo.size()} nodes in the cluster with ${noExecs} executors.")
+      raw(""" <a href="#" onClick="toggleNodeView('metaInfo');return false;">Show by Node</a>""")
+      
+      raw("""<div id="metaInfo" style="visibility:hidden;display:none"><table class="stats">""")
+      tr() {
+        th() {
+          text("OS")
+        }
+        th() {
+          text("Node")
+        }
+        th() {
+          text("Execs")
+        }
+      }
+
+      metaInfo.each{ val ->
+        tr() {
+          td() {
+            text(val.split(",")[2])
+          }
+          td() {
+            text(val.split(",")[0])
+          }
+          td() {
+            text(val.split(",")[1])
+          }
+        }
+      }
+      raw("</table></div>")
+    }
+    
     h2("Stats")
     p() {
       text("We have been gathering stats for ")

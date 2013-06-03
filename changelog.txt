@@ -1,6 +1,10 @@
 ********************************************
 	Jenkins Cluster Stats Plugin	
 ********************************************
+	0.4.2 (3th June 2013)
+	* Added throughput statistics view 
+	* Added cluster meta info view
+
 	0.4.1 (18th April 2013)
 	* Updating meta data for Jenkins plugin center to pick up the plugin 
 
