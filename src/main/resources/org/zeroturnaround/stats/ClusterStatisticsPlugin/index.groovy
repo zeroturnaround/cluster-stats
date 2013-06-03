@@ -127,8 +127,10 @@ l.layout(title: _("Disk Usage"), secured: "true") {
                 ${statsData.getAvgThroughputWeekPastWeek()} jobs/week""")
         raw(""" <a href="#" onClick="toggleNodeView('throughputPastWeek');return false;">show by Node</a>""")
         br()
-        text("""We have ${jobMetaInfo.size()} unique job configurations.""")
-        raw(""" <a href="#" onClick="toggleNodeView('jobBreakdown');return false;">Show by Node</a>""")
+        text("We have ")
+        b(jobMetaInfo.size())
+        text(" unique job configurations ")
+        raw(""" <a href="#" onClick="toggleNodeView('jobBreakdown');return false;">show by Node</a>""")
         
       raw("""<div id="throughput" style="visibility:hidden;display:none"><table class="stats">""")
       tr() {
@@ -210,7 +212,11 @@ l.layout(title: _("Disk Usage"), secured: "true") {
     }
     h2("Cluster meta info")
     p() {
-      text("We have ${metaInfo.size()} nodes in the cluster with ${noExecs} executors.")
+      text("We have ")
+      b(metaInfo.size())
+      text(" nodes in the cluster with ")
+      b(noExecs)
+      text(" executors.")
       raw(""" <a href="#" onClick="toggleNodeView('metaInfo');return false;">Show by Node</a>""")
       
       raw("""<div id="metaInfo" style="visibility:hidden;display:none"><table class="stats">""")
