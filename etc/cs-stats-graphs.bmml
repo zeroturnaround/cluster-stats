@@ -1,0 +1,20 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="609" measuredH="496" mockupW="609" mockupH="496">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="4" y="0" w="577" h="496" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Jenkins%20Cluster%20Statistics%0Ahttp%3A//jenkins/cluster-stats/</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::LineChart" x="90" y="167" w="435" h="175" measuredW="187" measuredH="175" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Title" x="0" y="86" w="609" h="-1" measuredW="447" measuredH="50" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Jenkins%20Cluster%20Statistics</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::TextArea" x="90" y="357" w="435" h="84" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20*%20weekly%20number%20of%20jobs%20run%0A%20*%20weekly%20number%20of%20hours%20of%20run%20time%0A%20*%20weekly%20number%20of%20hours%20of%20queue%20time%0A%20*%20weekly%20executor%20number</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

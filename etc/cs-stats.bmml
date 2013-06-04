@@ -1,0 +1,84 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="609" measuredH="729" mockupW="609" mockupH="729">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="17" y="0" w="592" h="729" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Jenkins%20Cluster%20Statistics%0Ahttp%3A//jenkins/cluster-stats/</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Title" x="0" y="86" w="609" h="-1" measuredW="447" measuredH="50" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Jenkins%20Cluster%20Statistics</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="88" y="151" w="-1" h="-1" measuredW="130" measuredH="32" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>18</size>
+        <text>Build%20Duration</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextArea" x="88" y="193" w="446" h="42" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Average%20build%20time%3A%2022%20min%20%28all%20time%29%2025%20min%20%28last%207%20days%29%20show%20by%20Node%0A95th%20percentile%3A%201hr%2017%20min</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::TextInput" x="88" y="251" w="-1" h="-1" measuredW="180" measuredH="32" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>18</size>
+        <text>Wait%20Time%20in%20Queue</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::TextArea" x="88" y="295" w="446" h="42" measuredW="200" measuredH="140" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Average%20build%20time%3A%2022%20min%20%28all%20time%29%2025%20min%20%28last%207%20days%29%20show%20by%20Node%0A95th%20percentile%3A%201hr%2017%20min</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::TextInput" x="88" y="357" w="-1" h="-1" measuredW="107" measuredH="32" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>18</size>
+        <text>Throughput</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::TextArea" x="88" y="401" w="446" h="42" measuredW="200" measuredH="140" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Average%20build%20time%3A%2022%20min%20%28all%20time%29%2025%20min%20%28last%207%20days%29%20show%20by%20Node%0A95th%20percentile%3A%201hr%2017%20min</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::TextInput" x="88" y="460" w="-1" h="-1" measuredW="157" measuredH="32" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>18</size>
+        <text>Cluster%20meta%20info</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::TextArea" x="88" y="508" w="446" h="29" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>We%20have%202%20nodes%20in%20the%20cluster%20with%202%20executors.%20Show%20by%20Node</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::TextInput" x="88" y="552" w="-1" h="-1" measuredW="56" measuredH="32" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>18</size>
+        <text>Stats</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::TextArea" x="88" y="596" w="446" h="42" measuredW="200" measuredH="140" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>We%20have%20been%20gathering%20stats%20for%2025%20days%20and%20there%20are%2072432%20data%20points.%20The%20data%20storage%20size%20is%2029%20315kb.</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Button" x="88" y="658" w="-1" h="-1" measuredW="246" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Download%20recorded%20information%20as%20CSV</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Button" x="349" y="658" w="-1" h="-1" measuredW="190" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete%20Recorded%20Information</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
