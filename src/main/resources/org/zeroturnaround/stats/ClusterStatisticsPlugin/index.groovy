@@ -48,8 +48,8 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       b(Util.getTimeSpanString(statsData.getAvgDuration()))
       text(" (all time) ")
       b(Util.getTimeSpanString(statsData.getAvgDurationPastWeek()))
-      text(" (last 7 days) ")
-      raw(""" <a href="#" onClick="toggleNodeView('buildNodes');return false;">show by Node</a>""")
+      text(" (last 7 days). ")
+      raw(""" <a href="#" onClick="toggleNodeView('buildNodes');return false;">Show by Node</a>""")
       br()
       text("95th percentile: " + Util.getTimeSpanString(statsData.getDurationPercentile(95)))
       
@@ -84,9 +84,9 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       b(Util.getTimeSpanString(statsData.getAvgWait()))
       text(" (all time) ")
       b(Util.getTimeSpanString(statsData.getAvgWaitPastWeek()))
-      text(" (last 7 days) ")
+      text(" (last 7 days). ")
       
-      raw(""" <a href="#" onClick="toggleNodeView('waitNodes');return false;">show by Node</a>""")
+      raw(""" <a href="#" onClick="toggleNodeView('waitNodes');return false;">Show by Node</a>""")
       br()
       text("95th percentile: " + Util.getTimeSpanString(statsData.getWaitPercentile(95)))
       
@@ -119,18 +119,18 @@ l.layout(title: _("Disk Usage"), secured: "true") {
     div() {
         text("""All time: ${statsData.getAvgThroughputHour()} jobs/hour, 
               ${statsData.getAvgThroughputDay()} jobs/day, 
-              ${statsData.getAvgThroughputWeek()} jobs/week""")
-        raw(""" <a href="#" onClick="toggleNodeView('throughput');return false;">show by Node</a>""")
+              ${statsData.getAvgThroughputWeek()} jobs/week. """)
+        raw(""" <a href="#" onClick="toggleNodeView('throughput');return false;">Show by Node</a>""")
         br()
         text("""Last 7 days: ${statsData.getAvgThroughputHourPastWeek()} jobs/hour,
                 ${statsData.getAvgThroughputDayPastWeek()} jobs/day,
-                ${statsData.getAvgThroughputWeekPastWeek()} jobs/week""")
-        raw(""" <a href="#" onClick="toggleNodeView('throughputPastWeek');return false;">show by Node</a>""")
+                ${statsData.getAvgThroughputWeekPastWeek()} jobs/week. """)
+        raw(""" <a href="#" onClick="toggleNodeView('throughputPastWeek');return false;">Show by Node</a>""")
         br()
         text("We have ")
         b(jobMetaInfo.size())
-        text(" unique job configurations ")
-        raw(""" <a href="#" onClick="toggleNodeView('jobBreakdown');return false;">show by Node</a>""")
+        text(" unique job configurations. ")
+        raw(""" <a href="#" onClick="toggleNodeView('jobBreakdown');return false;">Show by Node</a>""")
         
       raw("""<div id="throughput" style="visibility:hidden;display:none"><table class="stats">""")
       tr() {
