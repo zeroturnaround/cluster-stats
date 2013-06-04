@@ -1,6 +1,9 @@
 ********************************************
 	Jenkins Cluster Stats Plugin	
 ********************************************
+	0.4.4 (3th June 2013)
+	* Per node stats include pere executor view 
+
 	0.4.3 (3th June 2013)
 	* Added jobs statistics view 
 	* Logging now job.getName() rathern than getDisplayName()
