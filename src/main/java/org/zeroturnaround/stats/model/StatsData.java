@@ -6,11 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import jenkins.model.Jenkins;
 
@@ -486,8 +484,8 @@ public class StatsData {
     return nodeInfo;
   }
 
-  public Set<String> getClusterMetaInfo() {
-    Set<String> clusterInfo = new HashSet<String>();
+  public Map<String, String> getClusterMetaInfo() {
+    Map<String, String> clusterInfo = new HashMap<String, String>();
     Computer[] computers = Jenkins.getInstance().getComputers();
     for (int i = 0; i < computers.length; i++) {
       Computer c = computers[i];
@@ -502,7 +500,7 @@ public class StatsData {
       String osName = "Unknown";
       if (env.get("os.name") != null)
         osName = (String) env.get("os.name");
-      clusterInfo.add(computers[i].getNode().getDisplayName()+","+c.countExecutors()+","+osName);
+      clusterInfo.put(computers[i].getNode().getDisplayName(), c.countExecutors()+","+osName);
     }
     return clusterInfo;
   }

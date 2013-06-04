@@ -7,6 +7,7 @@ f = namespace("/lib/form")
 d = namespace("jelly:define")
 
 import java.text.Normalizer.Form;
+import java.text.DecimalFormat;
 
 import hudson.Util
 import lib.LayoutTagLib
@@ -15,6 +16,8 @@ import org.zeroturnaround.stats.ClusterStatisticsPlugin
 
 def l=namespace(LayoutTagLib.class)
 def StatsData statsData = my.statsData;
+
+clusterMetaInfo = statsData.getClusterMetaInfo();
 
 l.layout(title: _("Disk Usage"), secured: "true") {
   l.side_panel() {
@@ -138,7 +141,10 @@ l.layout(title: _("Disk Usage"), secured: "true") {
           text("Node")
         }
         th() {
-          text("No of jobs")
+          text("# jobs")
+        }
+        th() {
+          text("# jobs/exec")
         }
       }
       
@@ -152,6 +158,19 @@ l.layout(title: _("Disk Usage"), secured: "true") {
           td() {
             text(v)
           }
+          td() {
+            noExecs = clusterMetaInfo.get(k)
+            if (noExecs == null)
+              noExecs = 1;
+            else
+              noExecs = noExecs.split(",")[0].toInteger();
+            
+            DecimalFormat df = new DecimalFormat("#####0.00");
+            text(df.format(v.toInteger()/(double)noExecs))
+            text(" (")
+            text(noExecs)
+            text(")")
+          }
         }
       }
       raw("</table></div>")
@@ -162,7 +181,10 @@ l.layout(title: _("Disk Usage"), secured: "true") {
           text("Node")
         }
         th() {
-          text("No of jobs")
+          text("# jobs")
+        }
+        th() {
+          text("# jobs/exec")
         }
       }
       
@@ -175,6 +197,19 @@ l.layout(title: _("Disk Usage"), secured: "true") {
           }
           td() {
             text(v)
+          }
+          td(){
+            noExecs = clusterMetaInfo.get(k)
+            if (noExecs == null)
+              noExecs = 1;
+            else
+              noExecs = noExecs.split(",")[0].toInteger();
+            
+            DecimalFormat df = new DecimalFormat("#####0.00");
+            text(df.format(v.toInteger()/(double)noExecs))
+            text(" (")
+            text(noExecs)
+            text(")")
           }
         }
       }
@@ -205,15 +240,14 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       raw("</table></div>")
     
     noExecs = 0;
-    metaInfo = statsData.getClusterMetaInfo();
-    metaInfo.each {
-      val ->
-        noExecs += val.split(",")[1].toInteger();
+    clusterMetaInfo.each {
+      key, val ->
+        noExecs += val.split(",")[0].toInteger();
     }
     h2("Cluster meta info")
     p() {
       text("We have ")
-      b(metaInfo.size())
+      b(clusterMetaInfo.size())
       text(" nodes in the cluster with ")
       b(noExecs)
       text(" executors.")
@@ -232,16 +266,16 @@ l.layout(title: _("Disk Usage"), secured: "true") {
         }
       }
 
-      metaInfo.each{ val ->
+      clusterMetaInfo.each{ key, val ->
         tr() {
           td() {
-            text(val.split(",")[2])
+            text(val.split(",")[1])
+          }
+          td() {
+            text(key)
           }
           td() {
             text(val.split(",")[0])
-          }
-          td() {
-            text(val.split(",")[1])
           }
         }
       }
