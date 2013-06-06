@@ -19,7 +19,7 @@ def StatsData statsData = my.statsData;
 
 clusterMetaInfo = statsData.getClusterMetaInfo();
 
-l.layout(title: _("Disk Usage"), secured: "true") {
+l.layout(title: _("Cluster Statistics"), secured: "true") {
   l.side_panel() {
     l.tasks() {
       l.task(icon: "images/24x24/up.gif", title: _("Back to Dashboard"), href: "${rootURL}/")
