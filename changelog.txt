@@ -1,13 +1,9 @@
 ********************************************
 	Jenkins Cluster Stats Plugin	
 ********************************************
-	0.4.6 (21st June 2013)
+	0.4.5 (21st June 2013)
 	* Queue measuring is done with proper listeners
 	* Had to upgrade to Jenkins 1.521 for the queue listeners
-
-	0.4.5 (21st June 2013)
-	* Fixed a bug when using getName() vs getDisplayName()
-		and stats not showing up
 
 	0.4.4 (3th June 2013)
 	* Per node stats include pere executor view 
