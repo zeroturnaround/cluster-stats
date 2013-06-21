@@ -100,7 +100,7 @@ public class ClusterStatisticsPlugin extends Plugin {
     }
 
     public String getUrlName() {
-      return Hudson.getInstance().getRootUrl() + "plugin/cluster-stats/";
+      return Hudson.getInstance().getRootUrlFromRequest() + "plugin/cluster-stats/";
     }
 
     @Override
