@@ -59,12 +59,12 @@ public class StatsData {
    * initialized yet. We use this to find out the items that we should continue working
    * when Jenkins finishes jobs and we need to figure out how long they were in queue phase.
    */
-  public RunStats popUnInitializedItem(String displayName) {
+  public RunStats popUnInitializedItem(String name) {
     for (Iterator<RunStats> ite = getEdenStats().iterator(); ite.hasNext();) {
       RunStats stats = ite.next();
 
-      if (displayName.equals(stats.getProjectName()) &&
-          0L == stats.getDuration() && 0L != stats.getQueued()) {
+      if (name.equals(stats.getProjectName()) &&
+          0L == stats.getDuration() && -1L != stats.getTimeInQueue()) {
         ite.remove();
         return stats;
       }
@@ -72,11 +72,10 @@ public class StatsData {
     return null;
   }
 
-  public RunStats getUnInitializedItem(String displayName) {
+  public RunStats getUnInitializedItem(int queueId) {
     for (int i = getEdenStats().size() - 1; i >= 0; i--) {
       RunStats stats = getEdenStats().get(i);
-      if (displayName.equals(stats.getProjectName()) &&
-          0L == stats.getDuration() && 0L == stats.getStarted() && 0L != stats.getQueued()) {
+      if (queueId == stats.getQueueId()) {
         return stats;
       }
     }

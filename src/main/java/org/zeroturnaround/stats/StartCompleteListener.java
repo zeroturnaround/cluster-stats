@@ -2,8 +2,8 @@ package org.zeroturnaround.stats;
 
 import hudson.EnvVars;
 import hudson.Extension;
-import hudson.model.TaskListener;
 import hudson.model.Run;
+import hudson.model.TaskListener;
 import hudson.model.listeners.RunListener;
 import hudson.util.LogTaskListener;
 
@@ -25,7 +25,6 @@ public class StartCompleteListener extends RunListener<Run> {
   @Override
   public void onCompleted(Run r, TaskListener listener) {
     super.onCompleted(r, listener);
-
     ClusterStatisticsPlugin plugin = ClusterStatisticsPlugin.getInstance();
     RunStats stats = plugin.getStatsData().popUnInitializedItem(r.getParent().getName());
     if (stats != null) {
@@ -62,14 +61,10 @@ public class StartCompleteListener extends RunListener<Run> {
   @Override
   public void onStarted(Run r, TaskListener listener) {
     super.onStarted(r, listener);
-    ClusterStatisticsPlugin plugin = ClusterStatisticsPlugin.getInstance();
-    RunStats stats = plugin.getStatsData().getUnInitializedItem(r.getParent().getDisplayName());
-    if (stats != null) {
-      stats.setStarted(System.currentTimeMillis());
-    }
-    else {
-      log.fine("Unable to find the task from Eden space for startup. Ignoring.");
-    }
+    // we actually start the process in the queue listener
+    // we should do it here but right now we dont' worry about
+    // an item leaving the queue and staying too long before started
+    // probably should measure the time in the limbo at one point
   }
 
 }

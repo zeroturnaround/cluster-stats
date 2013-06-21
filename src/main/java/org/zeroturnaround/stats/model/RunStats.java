@@ -4,7 +4,9 @@ import java.util.UUID;
 
 public class RunStats {
   private long duration;
-  private long timeInQueue;
+  private long timeInQueue = -1;
+  private int queueId;
+
   private long started;
   private long queued;
   private String projectName;
@@ -87,6 +89,29 @@ public class RunStats {
   public String getNodeName() {
     return nodeName;
   }
+  
+  public int getQueueId() {
+    return queueId;
+  }
+
+  public void setQueueId(int queueId) {
+    this.queueId = queueId;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (int) (duration ^ (duration >>> 32));
+    result = prime * result + ((nodeName == null) ? 0 : nodeName.hashCode());
+    result = prime * result + ((projectName == null) ? 0 : projectName.hashCode());
+    result = prime * result + queueId;
+    result = prime * result + (int) (queued ^ (queued >>> 32));
+    result = prime * result + (int) (started ^ (started >>> 32));
+    result = prime * result + (int) (timeInQueue ^ (timeInQueue >>> 32));
+    result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+    return result;
+  }
 
   @Override
   public boolean equals(Object obj) {
@@ -99,11 +124,19 @@ public class RunStats {
     RunStats other = (RunStats) obj;
     if (duration != other.duration)
       return false;
+    if (nodeName == null) {
+      if (other.nodeName != null)
+        return false;
+    }
+    else if (!nodeName.equals(other.nodeName))
+      return false;
     if (projectName == null) {
       if (other.projectName != null)
         return false;
     }
     else if (!projectName.equals(other.projectName))
+      return false;
+    if (queueId != other.queueId)
       return false;
     if (queued != other.queued)
       return false;
@@ -111,18 +144,12 @@ public class RunStats {
       return false;
     if (timeInQueue != other.timeInQueue)
       return false;
+    if (uuid == null) {
+      if (other.uuid != null)
+        return false;
+    }
+    else if (!uuid.equals(other.uuid))
+      return false;
     return true;
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + (int) (duration ^ (duration >>> 32));
-    result = prime * result + ((projectName == null) ? 0 : projectName.hashCode());
-    result = prime * result + (int) (queued ^ (queued >>> 32));
-    result = prime * result + (int) (started ^ (started >>> 32));
-    result = prime * result + (int) (timeInQueue ^ (timeInQueue >>> 32));
-    return result;
   }
 }
