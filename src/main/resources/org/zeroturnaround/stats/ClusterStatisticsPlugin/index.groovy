@@ -10,13 +10,16 @@ import java.text.Normalizer.Form;
 import java.text.DecimalFormat;
 
 import hudson.Util
+import hudson.model.Hudson;
 import lib.LayoutTagLib
 import org.zeroturnaround.stats.model.StatsData
 import org.zeroturnaround.stats.ClusterStatisticsPlugin
+import org.zeroturnaround.stats.ClusterStatsManagementLink
 
 def l=namespace(LayoutTagLib.class)
 def StatsData statsData = my.statsData;
-
+def myRootURL = Hudson.getInstance().getRootUrlFromRequest()
+def myResURL =  rootURL+hudson.Functions.getResourcePath() + "/plugin/cluster-stats";
 clusterMetaInfo = statsData.getClusterMetaInfo();
 
 l.layout(title: _("Disk Usage"), secured: "true") {
@@ -117,7 +120,7 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       }
       raw("</table></div>")
     }
-    h2("Throughput")
+    raw("""<h2>Throughput <a href="${rootURL}/plugin/cluster-stats/throughput"><img src="${myResURL}/icons/chart-48.png" height="16px" width="16px"></a></h2>""")
     jobMetaInfo = statsData.getJobsMetaInfo();
     div() {
         text("""All time: ${statsData.getAvgThroughputHour()} jobs/hour, 

@@ -5,21 +5,26 @@ import hudson.model.Computer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import jenkins.model.Jenkins;
 
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
+import org.joda.time.LocalDateTime;
 
 public class StatsData {
   public static final long WEEK_IN_MS = 1000L * 60 * 60 * 24 * 7;
   public static final long DAY_IN_MS = 1000L * 60 * 60 * 24;
   public static final long HOUR_IN_MS = 1000L * 60 * 60;
 
-  private List<RunStats> runStats = new ArrayList<RunStats>();
+  protected List<RunStats> runStats = new ArrayList<RunStats>();
   private transient List<RunStats> edenStats = new ArrayList<RunStats>();
 
   public List<RunStats> getAllWaitTimes() {
@@ -499,11 +504,11 @@ public class StatsData {
       String osName = "Unknown";
       if (env.get("os.name") != null)
         osName = (String) env.get("os.name");
-      clusterInfo.put(computers[i].getNode().getDisplayName(), c.countExecutors()+","+osName);
+      clusterInfo.put(computers[i].getNode().getDisplayName(), c.countExecutors() + "," + osName);
     }
     return clusterInfo;
   }
-  
+
   public Map<String, Long> getJobsMetaInfo() {
     Map<String, Long> jobInfo = new HashMap<String, Long>();
     for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
@@ -515,6 +520,21 @@ public class StatsData {
       jobInfo.put(stats.getProjectName(), ++count);
     }
     return jobInfo;
+  }
+
+  public Map<Integer, Integer> getWeeklyThroughput() {
+    Map<Integer, Integer> weeklyThroughput = new HashMap<Integer, Integer>();
+    for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
+      RunStats stats = (RunStats) ite.next();
+      long started = stats.getStarted();
+      LocalDateTime time = new LocalDateTime(started);
+      int no = 0;
+      if (weeklyThroughput.get(time.getWeekOfWeekyear()) != null)
+        no = weeklyThroughput.get(time.getWeekOfWeekyear());
+      no++;
+      weeklyThroughput.put(time.getWeekOfWeekyear(), no);
+    }
+    return new TreeMap<Integer, Integer>(weeklyThroughput);
   }
 
   public void deleteAllStatistics() {
