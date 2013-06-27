@@ -1,9 +1,6 @@
 package org.zeroturnaround.stats;
 
-import hudson.Extension;
 import hudson.Plugin;
-import hudson.model.ManagementLink;
-import hudson.model.Hudson;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -85,27 +82,6 @@ public class ClusterStatisticsPlugin extends Plugin {
   public void cleanUp() {
     if (statsData.getAllWaitTimes().size() > (DATA_SIZE_LIMIT + SOME_EXTRA)) {
       statsData.cleanUp(DATA_SIZE_LIMIT);
-    }
-  }
-
-  @Extension
-  public static class ClusterStatsManagementLink extends ManagementLink {
-
-    public String getIconFileName() {
-      return "/plugin/cluster-stats/icons/cluster-48.png";
-    }
-
-    public String getDisplayName() {
-      return "Cluster Statistics";
-    }
-
-    public String getUrlName() {
-      return Hudson.getInstance().getRootUrlFromRequest() + "plugin/cluster-stats/";
-    }
-
-    @Override
-    public String getDescription() {
-      return "Get statistics about your Jenkins cluster. Average wait time, queue time for the master and the nodes.";
     }
   }
 }
