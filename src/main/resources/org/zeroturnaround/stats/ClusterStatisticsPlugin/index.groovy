@@ -50,8 +50,8 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       text("Average build time: ")
       b(Util.getTimeSpanString(statsData.getAvgDuration()))
       text(" (all time) ")
-      b(Util.getTimeSpanString(statsData.getAvgDurationPastWeek()))
-      text(" (last 7 days). ")
+      b(Util.getTimeSpanString(statsData.getAvgDurationTrailingWeek()))
+      text(" (trailing 7 days). ")
       raw(""" <a href="#" onClick="toggleNodeView('buildNodes');return false;">Show by Node</a>""")
       br()
       text("95th percentile: " + Util.getTimeSpanString(statsData.getDurationPercentile(95)))
@@ -86,8 +86,8 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       text("Average wait time: ")
       b(Util.getTimeSpanString(statsData.getAvgWait()))
       text(" (all time) ")
-      b(Util.getTimeSpanString(statsData.getAvgWaitPastWeek()))
-      text(" (last 7 days). ")
+      b(Util.getTimeSpanString(statsData.getAvgWaitTrailingWeek()))
+      text(" (trailing 7 days). ")
       
       raw(""" <a href="#" onClick="toggleNodeView('waitNodes');return false;">Show by Node</a>""")
       br()
@@ -125,10 +125,10 @@ l.layout(title: _("Disk Usage"), secured: "true") {
               ${statsData.getAvgThroughputWeek()} jobs/week. """)
         raw(""" <a href="#" onClick="toggleNodeView('throughput');return false;">Show by Node</a>""")
         br()
-        text("""Last 7 days: ${statsData.getAvgThroughputHourPastWeek()} jobs/hour,
-                ${statsData.getAvgThroughputDayPastWeek()} jobs/day,
-                ${statsData.getAvgThroughputWeekPastWeek()} jobs/week. """)
-        raw(""" <a href="#" onClick="toggleNodeView('throughputPastWeek');return false;">Show by Node</a>""")
+        text("""Trailing 7 days: ${statsData.getAvgThroughputHourTrailingWeek()} jobs/hour,
+                ${statsData.getAvgThroughputDayTrailingWeek()} jobs/day,
+                ${statsData.getAvgThroughputWeekTrailingWeek()} jobs/week. """)
+        raw(""" <a href="#" onClick="toggleNodeView('throughputTrailingWeek');return false;">Show by Node</a>""")
         br()
         text("We have ")
         b(jobMetaInfo.size())
@@ -175,7 +175,7 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       }
       raw("</table></div>")
       
-      raw("""<div id="throughputPastWeek" style="visibility:hidden;display:none"><table class="stats">""")
+      raw("""<div id="throughputTrailingWeek" style="visibility:hidden;display:none"><table class="stats">""")
       tr() {
         th() {
           text("Node")
@@ -188,7 +188,7 @@ l.layout(title: _("Disk Usage"), secured: "true") {
         }
       }
       
-      perNode = statsData.getJobCountBreakdownPastweek();
+      perNode = statsData.getJobCountBreakdownTrailingWeek();
       perNode = perNode.sort{a, b -> b.value <=> a.value}
       perNode.each{ k, v ->
         tr() {

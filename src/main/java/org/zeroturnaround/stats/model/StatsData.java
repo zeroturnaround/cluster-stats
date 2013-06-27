@@ -97,7 +97,7 @@ public class StatsData {
       return 0L;
   }
 
-  public long getAvgWaitPastWeek() {
+  public long getAvgWaitTrailingWeek() {
     final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
 
     List<RunStats> copyRunStats = new ArrayList<RunStats>(runStats);
@@ -155,7 +155,7 @@ public class StatsData {
     return rtrn;
   }
 
-  public Map<String, Long> getAvgWaitPerNodePastWeek() {
+  public Map<String, Long> getAvgWaitPerNodeTrailingWeek() {
     final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
 
     Map<String, Long> rtrn = new HashMap<String, Long>();
@@ -212,7 +212,7 @@ public class StatsData {
       return 0L;
   }
 
-  public long getAvgDurationPastWeek() {
+  public long getAvgDurationTrailingWeek() {
     final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
 
     List<RunStats> copyRunStats = new ArrayList<RunStats>(runStats);
@@ -270,7 +270,7 @@ public class StatsData {
     return rtrn;
   }
 
-  public Map<String, Long> getAvgDurationPerNodePastWeek() {
+  public Map<String, Long> getAvgDurationPerNodeTrailingWeek() {
     final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
 
     Map<String, Long> rtrn = new HashMap<String, Long>();
@@ -359,7 +359,7 @@ public class StatsData {
     return runStats.size() / weeks;
   }
 
-  private RunStats findFirstOfPastWeek() {
+  private RunStats findFirstOfTrailingWeek() {
     final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
 
     for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
@@ -370,7 +370,7 @@ public class StatsData {
     return runStats.get(0);
   }
 
-  private long getCountPastWeek() {
+  private long getCountTrailingWeek() {
     final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
     long rtrn = 0L;
     for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
@@ -381,48 +381,48 @@ public class StatsData {
     return rtrn;
   }
 
-  public long getAvgThroughputHourPastWeek() {
+  public long getAvgThroughputHourTrailingWeek() {
     if (runStats.size() < 2)
       return 0L;
 
-    final long first = findFirstOfPastWeek().getStarted();
+    final long first = findFirstOfTrailingWeek().getStarted();
     final long last = runStats.get(runStats.size() - 1).getStarted();
 
     final long diff = last - first;
     final long hours = diff / HOUR_IN_MS;
 
-    final long pastWeekCount = getCountPastWeek();
+    final long trailingWeekCount = getCountTrailingWeek();
 
     if (HOUR_IN_MS > diff)
-      return pastWeekCount;
+      return trailingWeekCount;
 
-    return pastWeekCount / hours;
+    return trailingWeekCount / hours;
   }
 
-  public long getAvgThroughputDayPastWeek() {
+  public long getAvgThroughputDayTrailingWeek() {
     if (runStats.size() < 2)
       return 0L;
 
-    final long first = findFirstOfPastWeek().getStarted();
+    final long first = findFirstOfTrailingWeek().getStarted();
     final long last = runStats.get(runStats.size() - 1).getStarted();
 
     final long diff = last - first;
     final long days = diff / DAY_IN_MS;
-    final long pastWeekCount = getCountPastWeek();
+    final long trailingWeekCount = getCountTrailingWeek();
 
     if (DAY_IN_MS > diff)
-      return pastWeekCount;
+      return trailingWeekCount;
 
-    return pastWeekCount / days;
+    return trailingWeekCount / days;
   }
 
-  public long getAvgThroughputWeekPastWeek() {
+  public long getAvgThroughputWeekTrailingWeek() {
     if (runStats.size() < 2)
       return 0L;
 
-    final long pastWeekCount = getCountPastWeek();
+    final long trailingWeekCount = getCountTrailingWeek();
 
-    return pastWeekCount;
+    return trailingWeekCount;
   }
 
   public long getDurationPercentile(long percentile) {
@@ -468,7 +468,7 @@ public class StatsData {
     return nodeInfo;
   }
 
-  public Map<String, Long> getJobCountBreakdownPastweek() {
+  public Map<String, Long> getJobCountBreakdownTrailingWeek() {
     final long sevenDaysAgo = System.currentTimeMillis() - (7 * DAY_IN_MS);
     Map<String, Long> nodeInfo = new HashMap<String, Long>();
     for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {

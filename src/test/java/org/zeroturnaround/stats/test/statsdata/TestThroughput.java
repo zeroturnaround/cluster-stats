@@ -82,7 +82,7 @@ public class TestThroughput extends TestCase {
     genStats(0);
     genStats(0);
 
-    assertEquals(2, statsData.getAvgThroughputHourPastWeek());
+    assertEquals(2, statsData.getAvgThroughputHourTrailingWeek());
   }
 
   public void testGetAvgThroughputDayPastWeek() {
@@ -110,7 +110,7 @@ public class TestThroughput extends TestCase {
     genStats(0);
     genStats(0);
 
-    assertEquals(1, statsData.getAvgThroughputDayPastWeek());
+    assertEquals(1, statsData.getAvgThroughputDayTrailingWeek());
   }
 
   public void testGetAvgThroughputWeekPastWeek() {
@@ -138,6 +138,6 @@ public class TestThroughput extends TestCase {
     genStats(0);
     genStats(0);
 
-    assertEquals(7, statsData.getAvgThroughputWeekPastWeek());
+    assertEquals(7, statsData.getAvgThroughputWeekTrailingWeek());
   }
 }

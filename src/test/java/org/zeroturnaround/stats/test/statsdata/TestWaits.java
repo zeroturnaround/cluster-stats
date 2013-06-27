@@ -41,7 +41,7 @@ public class TestWaits extends TestCase {
   }
 
   public void testGetAvgWaitPastWeekEmpty() {
-    long result = statsData.getAvgWaitPastWeek();
+    long result = statsData.getAvgWaitTrailingWeek();
     assertEquals(0L, result);
   }
 
@@ -49,7 +49,7 @@ public class TestWaits extends TestCase {
     genStats(1000, 6000, 6000);
     genStats(1000, 4000, 6000);
 
-    long result = statsData.getAvgWaitPastWeek();
+    long result = statsData.getAvgWaitTrailingWeek();
     assertEquals(5000L, result);
   }
 
@@ -59,7 +59,7 @@ public class TestWaits extends TestCase {
     genStats(1000, 6000, 6000);
     genStats(1000, 4000, 6000);
 
-    long result = statsData.getAvgWaitPastWeek();
+    long result = statsData.getAvgWaitTrailingWeek();
     assertEquals(5000L, result);
   }
 
@@ -85,7 +85,7 @@ public class TestWaits extends TestCase {
     genStats(1000, 4000, 6000, "node1");
     genStats(1000, 5000, 6000, "node1");
 
-    Map<String, Long> result = statsData.getAvgWaitPerNodePastWeek();
+    Map<String, Long> result = statsData.getAvgWaitPerNodeTrailingWeek();
     assertEquals(6000L, result.get("master").longValue());
     assertEquals(4500L, result.get("node1").longValue());
   }

@@ -40,7 +40,7 @@ public class TestDurations extends TestCase {
     genStats(2000, 6000, 6000);
     genStats(3000, 5000, 6000);
 
-    long result = statsData.getAvgDurationPastWeek();
+    long result = statsData.getAvgDurationTrailingWeek();
     assertEquals(2500L, result);
   }
 
@@ -67,7 +67,7 @@ public class TestDurations extends TestCase {
     genStats(2000, 3000, 6000, "node1");
     genStats(3000, 5000, 6000, "node1");
 
-    Map<String, Long> result = statsData.getAvgDurationPerNodePastWeek();
+    Map<String, Long> result = statsData.getAvgDurationPerNodeTrailingWeek();
     assertEquals(2, result.entrySet().size());
     assertEquals(1250L, result.get("master").longValue());
     assertEquals(2500L, result.get("node1").longValue());
