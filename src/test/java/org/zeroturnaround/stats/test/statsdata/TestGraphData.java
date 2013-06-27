@@ -46,8 +46,10 @@ public class TestGraphData extends TestCase {
     genStats(0);
     genStats(0);
     genStats(0);
-    
+
     Map<Integer, Integer> result = statsData.getWeeklyThroughput();
-    System.out.println(result);
+    assertEquals(Integer.valueOf(2), result.get(24));
+    assertEquals(Integer.valueOf(2), result.get(25));
+    assertEquals(Integer.valueOf(6), result.get(26));
   }
 }

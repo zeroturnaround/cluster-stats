@@ -544,7 +544,7 @@ public class StatsData {
 
   public void cleanUp(final int dataSizeLimit) {
     if (runStats.size() > dataSizeLimit) {
-      runStats = runStats.subList(runStats.size() - dataSizeLimit, runStats.size() - 1);
+      runStats = runStats.subList(runStats.size() - dataSizeLimit, runStats.size());
     }
   }
 }

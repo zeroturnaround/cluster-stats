@@ -21,8 +21,8 @@ public class ClusterStatisticsPlugin extends Plugin {
   private StatsData statsData = new StatsData();
   private transient long lastSaved = 0L;
 
-  private static final int DATA_SIZE_LIMIT = 150000;
-  private static final int SOME_EXTRA = 10000;
+  public static final int DATA_SIZE_LIMIT = 150000;
+  public static final int SOME_EXTRA = 10000;
 
   public StatsData getStatsData() {
     return statsData;
