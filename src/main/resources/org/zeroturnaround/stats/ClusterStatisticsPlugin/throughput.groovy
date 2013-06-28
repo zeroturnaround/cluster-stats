@@ -59,6 +59,8 @@ l.layout(title: _("Disk Usage"), secured: "true") {
       raw("""['W${k}', ${v}],""")
     }
     raw("""];""")
+    if (throughput.size() == 0)
+      raw("""myData = [['Week','Throughput'],[0,0]]""")
     raw("""</script>""")
     
     raw("""<script type="text/javascript" src="https://www.google.com/jsapi"></script>
