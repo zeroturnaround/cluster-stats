@@ -1,8 +1,9 @@
 ********************************************
 	Jenkins Cluster Stats Plugin	
 ********************************************
-	0.4.6 (27th June 2013)
-	* Downgraded Jenkins dep to 1.520 stable 
+	0.4.5 (25th Aug 2014)
+	* Upgraded Jenkins dep to 1.557 (JENKINS-21047)
+	* Synchronized file saving for JENKINS-23712
 
 	0.4.5 (21st June 2013)
 	* Queue measuring is done with proper listeners
