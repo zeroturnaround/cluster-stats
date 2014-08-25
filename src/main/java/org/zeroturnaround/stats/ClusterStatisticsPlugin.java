@@ -48,7 +48,7 @@ public class ClusterStatisticsPlugin extends Plugin {
     save();
   }
 
-  public void maybeSave() throws IOException {
+  public synchronized void maybeSave() throws IOException {
     long time = System.currentTimeMillis();
     if (lastSaved == 0L || (time - lastSaved) > (60L * 1000)) {
       super.save();
