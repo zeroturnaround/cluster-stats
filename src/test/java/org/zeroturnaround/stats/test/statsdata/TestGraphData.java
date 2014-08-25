@@ -1,5 +1,6 @@
 package org.zeroturnaround.stats.test.statsdata;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -32,14 +33,8 @@ public class TestGraphData extends TestCase {
     // more than 2 hours ago and 1 week ago
     genStats(StatsData.WEEK_IN_MS + 2 * StatsData.HOUR_IN_MS + 10);
 
-    // almost a week ago
-    genStats(7 * StatsData.DAY_IN_MS - 10);
-
-    // more than 2 days ago
-    genStats(2 * StatsData.DAY_IN_MS + 10);
-
-    // more than a day ago
-    genStats(StatsData.DAY_IN_MS + 10);
+    // more than 2 hours ago and 1 week ago
+    genStats(StatsData.WEEK_IN_MS + 2 * StatsData.HOUR_IN_MS + 10);
 
     // today
     genStats(0);
@@ -48,8 +43,9 @@ public class TestGraphData extends TestCase {
     genStats(0);
 
     Map<Integer, Integer> result = statsData.getWeeklyThroughput();
-    assertEquals(Integer.valueOf(2), result.get(24));
-    assertEquals(Integer.valueOf(2), result.get(25));
-    assertEquals(Integer.valueOf(6), result.get(26));
+    Iterator<Integer> values = result.values().iterator();
+    assertEquals(Integer.valueOf(2), values.next());
+    assertEquals(Integer.valueOf(2), values.next());
+    assertEquals(Integer.valueOf(4), values.next());
   }
 }
