@@ -7,3 +7,4 @@ target
 work
 .DS_Store
 src/main/resources/rebel.xml
+run-stuff.sh
