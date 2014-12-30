@@ -1,10 +1,12 @@
 package org.zeroturnaround.stats.test.statsdata;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.junit.Assert;
 import org.zeroturnaround.stats.model.RunStats;
 import org.zeroturnaround.stats.model.StatsData;
 
@@ -42,10 +44,15 @@ public class TestGraphData extends TestCase {
     genStats(0);
     genStats(0);
 
-    Map<Integer, Integer> result = statsData.getWeeklyThroughput();
-    Iterator<Integer> values = result.values().iterator();
-    assertEquals(Integer.valueOf(2), values.next());
-    assertEquals(Integer.valueOf(2), values.next());
-    assertEquals(Integer.valueOf(4), values.next());
+    // returns a map of "week no dash 2 digits of the year" as a key and then
+    // number of data points in that week. They are ordered but for this test
+    // in December the ordering can be different. So weird assert follows :)
+    //
+    Map<String, Integer> result = statsData.getWeeklyThroughput();
+    Integer[] actual = result.values().toArray(new Integer[] {});
+    Integer[] expected = new Integer[] { 2, 2, 4 };
+    Arrays.sort(actual);
+    Arrays.sort(expected);
+    Assert.assertArrayEquals(expected, actual);
   }
 }

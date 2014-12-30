@@ -519,19 +519,27 @@ public class StatsData {
     return jobInfo;
   }
 
-  public Map<Integer, Integer> getWeeklyThroughput() {
-    Map<Integer, Integer> weeklyThroughput = new HashMap<Integer, Integer>();
+  /**
+   * Iterates over all data points and puts in separate buckets
+   * per week no in the year with prefixed by the year.
+   * 
+   * @return a map of number of builds per week.
+   */
+  public Map<String, Integer> getWeeklyThroughput() {
+    Map<String, Integer> weeklyThroughput = new HashMap<String, Integer>();
     for (Iterator<RunStats> ite = runStats.iterator(); ite.hasNext();) {
       RunStats stats = (RunStats) ite.next();
       long started = stats.getStarted();
       LocalDateTime time = new LocalDateTime(started);
       int no = 0;
-      if (weeklyThroughput.get(time.getWeekOfWeekyear()) != null)
-        no = weeklyThroughput.get(time.getWeekOfWeekyear());
+      String key = time.getWeekOfWeekyear() + "-" + (time.getWeekyear() + "").substring(2, 4);
+      if (weeklyThroughput.get(key) != null) {
+        no = weeklyThroughput.get(key);
+      }
       no++;
-      weeklyThroughput.put(time.getWeekOfWeekyear(), no);
+      weeklyThroughput.put(key, no);
     }
-    return new TreeMap<Integer, Integer>(weeklyThroughput);
+    return new TreeMap<String, Integer>(weeklyThroughput);
   }
 
   public void deleteAllStatistics() {

@@ -8,7 +8,7 @@
 
 	<groupId>org.zeroturnaround</groupId>
 	<artifactId>cluster-stats</artifactId>
-	<version>0.4.7-SNAPSHOT</version>
+	<version>0.4.8-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 	<name>Cluster Statistics Plugin</name>
         <url>https://wiki.jenkins-ci.org/display/JENKINS/Cluster+Statistics+Plugin</url>
@@ -84,6 +84,7 @@
 					<testFailureIgnore>true</testFailureIgnore>
 				</configuration>
 			</plugin>
+      
 		</plugins>
 	</build>
 
