@@ -1,7 +1,7 @@
 ********************************************
 	Jenkins Cluster Stats Plugin	
 ********************************************
-	0.4.6 (25th Aug 2014)
+	0.4.7 (30th Dec 2014)
 	* Updating naming of the plugin (JENKINS-25861)
 
 	0.4.5 (25th Aug 2014)
