@@ -1,7 +1,6 @@
 package org.zeroturnaround.stats.test.statsdata;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Map;
 
 import junit.framework.TestCase;
